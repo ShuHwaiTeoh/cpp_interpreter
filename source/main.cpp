@@ -4,11 +4,9 @@
 #include "Frame.h"
 
 int main(int argc, char* argv[]) {
-<<<<<<< HEAD
-//	myMemory mem;//Program memory
-=======
+
 	//myMemory mem;//Program memory
->>>>>>> b78719728d2cedd98ee8cfddf42d18cd130c25e6
+
 	Runtime rstack;//runtime stack
 	Frame fpstack;//stack of frame pointers
 	int pc = 0;//program counter
