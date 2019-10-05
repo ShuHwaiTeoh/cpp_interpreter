@@ -2,3 +2,6 @@
 
 Frame::Frame() {}
 Frame::~Frame() {}
+void Frame::print(){
+
+}

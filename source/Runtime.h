@@ -8,6 +8,7 @@ class Runtime{
 public:
 	Runtime();
 	virtual ~Runtime();
+	void print();
 
 	std::vector<Data> stack;
 };

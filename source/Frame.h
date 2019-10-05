@@ -8,8 +8,9 @@ class Frame{
 public:
 	Frame();
 	virtual ~Frame();
+	void print();
 
-	std::vector<Data> stack;
+	std::vector<int> stack;
 };
 
 #endif
