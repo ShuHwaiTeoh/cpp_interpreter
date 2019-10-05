@@ -1,7 +1,9 @@
 #include "MyMemory.h"
 
-MyMemory::getMemory(int pcme) {
-	
+MyMemory::MyMemory(){}
+MyMemory::~MyMemory(){}
+Data MyMemory::getMemory(int pc) {
+	return stack[pc];
 }
 
-MyMemory::~MyMemory(){}
+

@@ -1,6 +1,11 @@
 #ifndef INTERPRETER_H
 #define INTERPRETER_H
-#include<string>
-//#include"myMemory.h"
+#include<iostream>
+#include<fstream>
+#include<vector>
+#include"myMemory.h"
+#include"Data.h"
 
-//void loadFile(char*, myMemory);
+void loadFile(char*, MyMemory*);
+short convert2short(Data, Data);
+int convert2int(Data, Data, Data, Data);

@@ -1,7 +1,13 @@
-#include<iostream>
+#ifndef MyMemory_H
+#define MyMemory_H
 #include<vector>
+#include<Data.h>
 
 class MyMemory {
 public:
-	MyMemory getMemory( );
+	MyMemory();
+	virtual ~MyMemory();
+	Data getMemory(int);
+
+	std::vector<Data> stack;
 };

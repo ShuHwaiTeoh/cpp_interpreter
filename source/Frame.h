@@ -9,7 +9,7 @@ public:
 	Frame();
 	virtual ~Frame();
 
-	std::vector<int> stack;
+	std::vector<Data> stack;
 };
 
 #endif
