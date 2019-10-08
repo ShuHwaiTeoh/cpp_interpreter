@@ -18,3 +18,23 @@ void loadFile(char* fileName, MyMemory* mem){
 	else std::cout << "cannot open file" <<std::endl;
 	file.close();
 }
+
+short convert2short(Data& data1, Data& data2){
+	short intosh;
+	intosh = (data1.value <<8) | data2.value;
+	return intosh;
+}
+int convert2int(Data& data1, Data& data2,Data& data3, Data& data4){
+	int packit=0;
+	packit = (data1.value << 12) | (data2.value << 8) | (data3.value << 4) | data4.value;
+	return packit;
+//	integer = data1.value*1000 + data2.value*100 + data3.value*10 + data4.
+}
+
+float convert2float(Data& data1, Data& data2, Data& data3, Data& data4){
+	float inter=0;
+	inter = (data1.value << 12) | (data2.value << 8) | (data3.value << 4) | data4.value;
+	return inter;
+}
+
+
