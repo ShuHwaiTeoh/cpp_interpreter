@@ -11,3 +11,4 @@ short convert2short(Data&, Data&);
 int convert2int(Data&, Data&, Data&, Data&);
 float convert2float(Data&, Data&, Data&, Data&);
 
+#endif

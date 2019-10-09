@@ -1,19 +1,19 @@
 #include "Data.h"
 
-Data::Data(int v, std::string t) {
-	value = v;
+Data::Data(int v, char t) {
+	intV = v;
 	type = t;
 }
-Data::Data(short v, std::string t) {
-	value = v;
+Data::Data(short v, char t) {
+	shortV = v;
 	type = t;
 }
-Data::Data(char v, std::string t) {
-	value = v;
+Data::Data(char v, char t) {
+	charV = v;
 	type = t;
 }
-Data::Data(float v, std::string t) {
-	value = v;
+Data::Data(float v, char t) {
+	floatV = v;
 	type = t;
 }
 Data::~Data() {}

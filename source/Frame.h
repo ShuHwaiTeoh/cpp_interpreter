@@ -3,6 +3,7 @@
 #include<vector>
 #include "Memory.h"
 #include "Data.h"
+#include<iostream>
 
 class Frame{
 public:

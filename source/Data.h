@@ -1,16 +1,18 @@
 #ifndef Data_H
 #define Data_H
-#include<string>
 
 class Data{
 public:
-	Data(int, std::string);
-	Data(short, std::string);
-	Data(char, std::string);
-	Data(float, std::string);
+	Data(int, char);
+	Data(short, char);
+	Data(char, char);
+	Data(float, char);
 	virtual ~Data();
-	int value;
-	std::string type;//char, short, int, float, byte
+	char charV = '\0';
+	short shortV = 0;
+	int intV = 0;
+	float floatV = 0.0;
+    char type;//C(Byte), S, I, F
 };
 
 #endif /* ALARM_H */

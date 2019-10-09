@@ -5,7 +5,12 @@
 Frame::Frame() {}
 Frame::~Frame() {}
 void Frame::print(){
-	for (int i=0;i<stack.size;i++){
-		std::cout<<stack[i];
+	if (stack.size()==0){
+		std::cout<<"empty"<<std::endl;
+	}
+	else{
+		for (unsigned int i=0; i< stack.size(); i++){
+			std::cout<<stack[i];
+		}
 	}
 }

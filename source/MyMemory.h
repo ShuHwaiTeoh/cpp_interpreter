@@ -1,7 +1,7 @@
 #ifndef MyMemory_H
 #define MyMemory_H
 #include<vector>
-#include<Data.h>
+#include "Data.h"
 
 class MyMemory {
 public:
@@ -11,3 +11,5 @@ public:
 
 	std::vector<Data> stack;
 };
+
+#endif
