@@ -7,7 +7,7 @@ class MyMemory {
 public:
 	MyMemory();
 	virtual ~MyMemory();
-	Data getMemory(int);
+	Data* getMemory(int);
 
 	std::vector<Data> stack;
 };

@@ -2,8 +2,8 @@
 
 MyMemory::MyMemory(){}
 MyMemory::~MyMemory(){}
-Data MyMemory::getMemory(int pc) {
-	return stack[pc];
+Data* MyMemory::getMemory(int pc) {
+	return &stack[pc];
 }
 
 

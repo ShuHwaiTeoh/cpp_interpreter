@@ -6,26 +6,27 @@
 #include "Interpreter.h"
 #include<vector>
 
-int main(int argc, char* argv[]) {
+//int main(int argc, char* argv[]) {
+int main(){
 
 	MyMemory* mem = new MyMemory();//Program memory
 	Runtime* rstack = new Runtime();//runtime stack
 	Frame* fpstack = new Frame();//stack of frame pointers
-	Data* temp;
+	Data *temp = NULL;
 	int pc = 0;//program counter
 	int sp = -1;//runtime stack pointer
 	int fpsp = -1;//frame pointer stack pointer
-	Data* d;
-	int opcode;//instructions to be executed
+	int opcode = 0;//instructions to be executed
 	short s;
 	int i, j, flag = 1;
 	float f;
 
-	loadFile(argv[1], mem);
+	//loadFile(argv[1], mem);
+	loadFile("D:\\Purdue\\3\\30862\\hw\\C++project\\src\\interpreter_input.smp", mem);
 	while (flag){
-		*d = mem->getMemory(pc);
-		pc++;
-		opcode = (d -> charV) - NULL;
+		temp = mem->getMemory(pc);
+		//pc = pc + 1;
+		opcode = int(temp->charV);
 		switch (opcode) {
 			case 132:
 				if (rstack->stack[sp-1].type == 'C'){
@@ -189,27 +190,27 @@ int main(int argc, char* argv[]) {
 				rstack->stack[fpstack->stack[fpsp] + rstack->stack[sp-1].intV + 1].type = 'F';
 				break;
 			case 88:
-				rstack->stack[fpstack->stack[fpsp] + rstack->stack[sp-1].intV + 1].charV =
-						rstack->stack[fpstack->stack[fpsp] + rstack->stack[sp].intV + 1].charV;
-				rstack->stack[fpstack->stack[fpsp] + rstack->stack[sp-1].intV + 1].type = 'C';
+				rstack->stack[fpstack->stack[fpsp] + rstack->stack[sp].intV + 1].charV =
+						rstack->stack[fpstack->stack[fpsp] + rstack->stack[sp-1].intV + 1].charV;
+				rstack->stack[fpstack->stack[fpsp] + rstack->stack[sp].intV + 1].type = 'C';
 				break;
 			case 89:
-				rstack->stack[fpstack->stack[fpsp] + rstack->stack[sp-1].intV + 1].shortV =
-						rstack->stack[fpstack->stack[fpsp] + rstack->stack[sp].intV + 1].shortV;
-				rstack->stack[fpstack->stack[fpsp] + rstack->stack[sp-1].intV + 1].type = 'S';
+				rstack->stack[fpstack->stack[fpsp] + rstack->stack[sp].intV + 1].shortV =
+						rstack->stack[fpstack->stack[fpsp] + rstack->stack[sp-1].intV + 1].shortV;
+				rstack->stack[fpstack->stack[fpsp] + rstack->stack[sp].intV + 1].type = 'S';
 				break;
 			case 90:
-				rstack->stack[fpstack->stack[fpsp] + rstack->stack[sp-1].intV + 1].intV =
-						rstack->stack[fpstack->stack[fpsp] + rstack->stack[sp].intV + 1].intV;
-				rstack->stack[fpstack->stack[fpsp] + rstack->stack[sp-1].intV + 1].type = 'I';
+				rstack->stack[fpstack->stack[fpsp] + rstack->stack[sp].intV + 1].intV =
+						rstack->stack[fpstack->stack[fpsp] + rstack->stack[sp-1].intV + 1].intV;
+				rstack->stack[fpstack->stack[fpsp] + rstack->stack[sp].intV + 1].type = 'I';
 				break;
 			case 91:
-				rstack->stack[fpstack->stack[fpsp] + rstack->stack[sp-1].intV + 1].floatV =
-						rstack->stack[fpstack->stack[fpsp] + rstack->stack[sp].intV + 1].floatV;
-				rstack->stack[fpstack->stack[fpsp] + rstack->stack[sp-1].intV + 1].type = 'F';
+				rstack->stack[fpstack->stack[fpsp] + rstack->stack[sp].intV + 1].floatV =
+						rstack->stack[fpstack->stack[fpsp] + rstack->stack[sp-1].intV + 1].floatV;
+				rstack->stack[fpstack->stack[fpsp] + rstack->stack[sp].intV + 1].type = 'F';
 				break;
 			case 94:
-				*temp = rstack->stack[sp-1];
+				temp = &(rstack->stack[sp-1]);
 				rstack->stack[sp-1] = rstack->stack[sp];
 				rstack->stack[sp] = *temp;
 				break;
@@ -275,8 +276,9 @@ int main(int argc, char* argv[]) {
 				break;
 			case 0:
 				flag = 0;
-				std::cout << "pc: " << pc << std::endl;
-				std::cout << "pc: " << sp << std::endl;
+				std::cout << "Compile values:" << std::endl;
+				std::cout << "PC: " << pc << std::endl;
+				std::cout << "sp: " << sp << std::endl;
 				rstack->print();
 				std::cout << "fpsp: " << fpsp << std::endl;
 				fpstack->print();
