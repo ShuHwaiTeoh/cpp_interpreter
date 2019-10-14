@@ -22,7 +22,8 @@ int main(){
 	float f;
 
 	//loadFile(argv[1], mem);
-	loadFile("D:\\Purdue\\3\\30862\\hw\\C++project\\src\\interpreter_input.smp", mem);
+//	loadFile("D:\\Purdue\\3\\30862\\hw\\C++project\\src\\interpreter_input.smp", mem);
+	loadFile("C:\\Users\\danie\\eclipse-workspace\\sample_test\\src\\interpreter_input.smp", mem);
 	while (flag){
 		temp = mem->getMemory(pc);
 		//pc = pc + 1;
@@ -82,7 +83,7 @@ int main(){
 				sp = sp - 2;
 				break;
 			case 44:
-				fpstack->stack.push_back(sp - rstack->stack[sp].intV);
+				fpstack->stack.push_back(sp - rstack->stack[sp].intV-1);
 				fpsp++;
 				sp--;
 				pc = rstack->stack[sp--].intV;
@@ -135,18 +136,18 @@ int main(){
 				break;
 			case 80:
 				if (rstack->stack[sp-1].type == 'C'){
-					rstack->stack[rstack->stack[sp].intV].charV = rstack->stack[sp-1].charV;
+					rstack->stack[fpstack->stack[fpsp]+rstack->stack[sp].intV+1].charV = rstack->stack[sp-1].charV;
 				}
 				else if (rstack->stack[sp-1].type == 'S'){
-					rstack->stack[rstack->stack[sp].intV].shortV = rstack->stack[sp-1].shortV;
+					rstack->stack[fpstack->stack[fpsp]+rstack->stack[sp].intV+1].shortV = rstack->stack[sp-1].shortV;
 				}
 				else if (rstack->stack[sp-1].type == 'I'){
-					rstack->stack[rstack->stack[sp].intV].intV = rstack->stack[sp-1].intV;
+					rstack->stack[fpstack->stack[fpsp]+rstack->stack[sp].intV+1].intV = rstack->stack[sp-1].intV;
 				}
 				else if (rstack->stack[sp-1].type == 'F'){
-					rstack->stack[rstack->stack[sp].intV].floatV = rstack->stack[sp-1].floatV;
+					rstack->stack[fpstack->stack[fpsp]+rstack->stack[sp].intV+1].floatV = rstack->stack[sp-1].floatV;
 				}
-				rstack->stack[rstack->stack[sp].intV].type = rstack->stack[sp-1].type;
+				rstack->stack[fpstack->stack[fpsp]+rstack->stack[sp].intV+1].type = rstack->stack[sp-1].type;
 				sp -= 2;
 				break;
 			case 77:
@@ -284,6 +285,14 @@ int main(){
 				fpstack->print();
 				break;
 		}
+		std::cout << "Compile values:" << std::endl;
+		std::cout << "PC: " << pc << std::endl;
+		std::cout << "sp: " << sp << std::endl;
+		std::cout << "rstack:" << std::endl;
+		rstack->print();
+		std::cout << "fpsp: " << fpsp << std::endl;
+		std::cout << "fpstack:" << std::endl;
+		fpstack->print();
 	}
 
 	return 0;
