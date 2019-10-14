@@ -6,6 +6,7 @@
 #include<vector>
 #include"myMemory.h"
 #include"Data.h"
+#include <math.h>
 
 void loadFile(std::string, MyMemory*);
 short convert2short(Data&, Data&);
