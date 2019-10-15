@@ -10,7 +10,8 @@ void Frame::print(){
 	}
 	else{
 		for (unsigned int i=0; i< stack.size(); i++){
-			std::cout<<stack[i]<<std::endl;
+			std::cout<<stack[i];
 		}
+		std::cout<<std::endl;
 	}
 }
