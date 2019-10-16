@@ -19,8 +19,11 @@ void loadFile(std::string fileName, MyMemory* mem){
 //	  size = begin - end;
 	  for(i=0; i < size; i++){
 		  file.read(&byte,1);
-		  mem->stack.push_back(Data(byte, 'C'));
+//		  std::cout<<"byte:"<<byte<<std::endl;
+		  mem->stack.push_back(Data(static_cast<unsigned char>(byte), 'C'));
 	  }
+//	  std::cout<<"size:"<<size<<std::endl;
+
 	}
 	else std::cout << "cannot open file" <<std::endl;
 	file.close();

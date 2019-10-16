@@ -8,7 +8,7 @@ Data::Data(short v, char t) {
 	shortV = v;
 	type = t;
 }
-Data::Data(char v, char t) {
+Data::Data(unsigned char v, char t) {
 	charV = v;
 	type = t;
 }

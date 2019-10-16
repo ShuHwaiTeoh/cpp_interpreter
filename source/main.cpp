@@ -25,7 +25,13 @@ int main(){
 	//loadFile(argv[1], mem);
 //	loadFile("D:\\Purdue\\3\\30862\\hw\\C++project\\src\\interpreter_input.smp", mem);
 	loadFile("C:\\Users\\danie\\eclipse-workspace\\sample_test\\src\\interpreter_input.smp", mem);
+//	std::cout<<"f:   "<<int('f')<<std::endl;
+//	for (int h=0;h<90;h++){
+//		temp = mem->getMemory(h);
+//		std::cout<<h<<":   "<<int(temp->charV)<<std::endl;
+//	}
 	while (flag){
+//	for(int p=0;p<150;p++){
 		temp = mem->getMemory(pc);
 		//pc = pc + 1;
 		opcode = int(temp->charV);
@@ -43,7 +49,7 @@ int main(){
 				else if (rstack->stack[sp-1].type == 'F'){
 					rstack->stack[sp-1] = Data((rstack->stack[sp-1].floatV == rstack->stack[sp].floatV), 'I');
 				}
-				rstack->stack.pop_back();
+//				rstack->stack.pop_back();
 				sp--;
 				pc++;
 				break;
@@ -60,7 +66,7 @@ int main(){
 				else if (rstack->stack[sp-1].type == 'F'){
 					rstack->stack[sp-1] = Data((rstack->stack[sp-1].floatV < rstack->stack[sp].floatV), 'I');
 				}
-				rstack->stack.pop_back();
+//				rstack->stack.pop_back();
 				sp--;
 				pc++;
 				break;
@@ -77,7 +83,7 @@ int main(){
 				else if (rstack->stack[sp-1].type == 'F'){
 					rstack->stack[sp-1] = Data((rstack->stack[sp-1].floatV > rstack->stack[sp].floatV), 'I');
 				}
-				rstack->stack.pop_back();
+//				rstack->stack.pop_back();
 				sp--;
 				pc++;
 				break;
@@ -96,60 +102,78 @@ int main(){
 				fpstack->stack.push_back(sp - rstack->stack[sp].intV-1);
 				fpsp++;
 				sp--;
+//				rstack->stack.pop_back();
 				pc = rstack->stack[sp--].intV;
+//				rstack->stack.pop_back();
 				break;
 			case 48:
 				sp = fpstack->stack[fpsp--];
 				pc = rstack->stack[sp].intV;
 				break;
 			case 68:
-				rstack->stack.push_back(Data(mem->stack[pc+1].charV, 'C'));
+//				temp = Data(mem->stack[pc+1].charV, 'C');
 				sp++;
+				rstack->stack.insert(rstack->stack.begin()+sp,Data(mem->stack[pc+1].charV, 'C'));
 				pc = pc + 2;
 				break;
 			case 69:
-				s = convert2short(mem->stack[pc+1], mem->stack[pc+2]);
-				rstack->stack.push_back(Data(s, 'S'));
 				sp++;
+				s = convert2short(mem->stack[pc+1], mem->stack[pc+2]);
+				rstack->stack.insert(rstack->stack.begin()+sp,Data(s, 'S'));
+//				sp++;
 				pc += 3;
 				break;
 			case 70:
-				i = convert2int(mem->stack[pc+1], mem->stack[pc+2], mem->stack[pc+3], mem->stack[pc+4]);
-				rstack->stack.push_back(Data(i, 'I'));
 				sp++;
+				i = convert2int(mem->stack[pc+1], mem->stack[pc+2], mem->stack[pc+3], mem->stack[pc+4]);
+				rstack->stack.insert(rstack->stack.begin()+sp,Data(i, 'I'));
+//				sp++;
 				pc += 5;
 				break;
 			case 71:
-				f = convert2float(mem->stack[pc+1], mem->stack[pc+2], mem->stack[pc+3], mem->stack[pc+4]);
-				rstack->stack.push_back(Data(f, 'F'));
 				sp++;
+				f = convert2float(mem->stack[pc+1], mem->stack[pc+2], mem->stack[pc+3], mem->stack[pc+4]);
+				rstack->stack.insert(rstack->stack.begin()+sp,Data(f, 'F'));
+//				sp++;
 				pc += 5;
 				break;
 			case 72:
-				rstack->stack.push_back(Data(rstack->stack[rstack->stack[sp].intV].charV, 'C'));
-				sp++;
+//				sp++;
+//				rstack->stack.insert(rstack->stack.begin()+sp,Data(rstack->stack[rstack->stack[sp].intV].charV, 'C'));
+//				sp++;
+				rstack->stack[sp].charV = rstack->stack[rstack->stack[sp].intV + fpstack->stack[fpsp] +1].charV;
 				pc++;
 				break;
 			case 73:
-				rstack->stack.push_back(Data(rstack->stack[rstack->stack[sp].intV].shortV, 'S'));
-				sp++;
+//				sp++;
+//				rstack->stack.insert(rstack->stack.begin()+sp,Data(rstack->stack[rstack->stack[sp].intV].shortV, 'S'));
+//				sp++;
+				rstack->stack[sp].shortV = rstack->stack[rstack->stack[sp].intV + fpstack->stack[fpsp] +1].shortV;
 				pc++;
 				break;
 			case 74:
-				rstack->stack.push_back(Data(rstack->stack[rstack->stack[sp].intV].intV, 'I'));
-				sp++;
+//				i = rstack->stack[sp].intV;
+//				rstack->stack.pop_back();
+//				sp--;
+				rstack->stack[sp].intV = rstack->stack[rstack->stack[sp].intV + fpstack->stack[fpsp] +1].intV;
+//				sp++;
+//				std::cout<<"pc++??"<<pc<<std::endl;
 				pc++;
+//				std::cout<<"pc++??"<<pc<<std::endl;
 				break;
 			case 75:
-				rstack->stack.push_back(Data(rstack->stack[rstack->stack[sp].intV].floatV, 'F'));
-				sp++;
+//				rstack->stack.pop_back();
+//				rstack->stack.push_back(Data(rstack->stack[rstack->stack[sp].intV].floatV, 'F'));
+//				rstack->stack.pop_back();
+//				sp++;
+				rstack->stack[sp].floatV = rstack->stack[rstack->stack[sp].intV + fpstack->stack[fpsp] +1].floatV;
 				pc++;
 				break;
 			case 76:
 				sp -= rstack->stack[sp].intV;
-				for (int k=0;k<rstack->stack[sp].intV;k++){
-					rstack->stack.pop_back();
-				}
+//				for (int k=0;k<rstack->stack[sp].intV;k++){
+//					rstack->stack.pop_back();
+//				}
 				pc++;//
 				break;
 			case 80:
@@ -166,7 +190,7 @@ int main(){
 					rstack->stack[fpstack->stack[fpsp]+rstack->stack[sp].intV+1].floatV = rstack->stack[sp-1].floatV;
 				}
 				rstack->stack[fpstack->stack[fpsp]+rstack->stack[sp].intV+1].type = rstack->stack[sp-1].type;
-//				sp -= 2;
+//****				sp -= 2;
 //				rstack->stack.pop_back();
 				pc++;
 				break;
@@ -182,16 +206,15 @@ int main(){
 					}
 					else if (rstack->stack[sp-rstack->stack[sp].intV + j].type == 'I'){
 						rstack->stack[fpstack->stack[fpsp] + j + 1].intV = rstack->stack[sp-rstack->stack[sp].intV + j].intV;
-
 					}
 					else if (rstack->stack[sp-rstack->stack[sp].intV + j].type == 'F'){
 						rstack->stack[fpstack->stack[fpsp] + j + 1].floatV = rstack->stack[sp-rstack->stack[sp].intV + j].floatV;
 					}
 					rstack->stack[fpstack->stack[fpsp] + j + 1].type = rstack->stack[sp-rstack->stack[sp].intV + j].type;
 				}
-				for (int k = 0;k<valuei;k++){
-					rstack->stack.pop_back();
-				}
+//				for (int k = 0;k<valuei;k++){
+//					rstack->stack.pop_back();
+//				}
 				sp = fpstack->stack[fpsp] + rstack->stack[sp].intV;
 				pc++;
 				break;
@@ -259,7 +282,7 @@ int main(){
 				else if (rstack->stack[sp-1].type == 'F'){
 					rstack->stack[sp-1] = Data(rstack->stack[sp-1].floatV + rstack->stack[sp].floatV, 'F');
 				}
-				rstack->stack.pop_back();
+//				rstack->stack.pop_back();
 				sp--;
 				pc++;
 				break;
@@ -274,7 +297,7 @@ int main(){
 					rstack->stack[sp-1] = Data(rstack->stack[sp-1].floatV - rstack->stack[sp].floatV, 'F');
 				}
 
-				rstack->stack.pop_back();
+//				rstack->stack.pop_back();
 				sp--;
 				pc++;
 				break;
@@ -288,7 +311,7 @@ int main(){
 				else if (rstack->stack[sp-1].type == 'F'){
 					rstack->stack[sp-1] = Data(rstack->stack[sp-1].floatV * rstack->stack[sp].floatV, 'F');
 				}
-				rstack->stack.pop_back();
+//				rstack->stack.pop_back();
 				sp--;
 				pc++;
 				break;
@@ -302,7 +325,7 @@ int main(){
 				else if (rstack->stack[sp-1].type == 'F'){
 					rstack->stack[sp-1] = Data(rstack->stack[sp-1].floatV / rstack->stack[sp].floatV, 'F');
 				}
-				rstack->stack.pop_back();
+//				rstack->stack.pop_back();
 				sp--;
 				pc++;
 				break;
@@ -323,24 +346,33 @@ int main(){
 				pc++;
 				break;
 			case 0:
-				std::cout << "here" <<std::endl;
+				sp = -1;
+				fpsp = -1;
+				rstack->stack.clear();
+				fpstack->stack.clear();
+//				std::cout << "here" <<std::endl;
 				flag = 0;
+				std::cout<<std::endl;
 				std::cout << "Compile values:" << std::endl;
 				std::cout << "pc: " << pc << std::endl;
 				std::cout << "sp: " << sp << std::endl;
+				std::cout << "rstack: ";
 				rstack->print();
 				std::cout << "fpsp: " << fpsp << std::endl;
+				std::cout << "fpstack: ";
 				fpstack->print();
+
 				break;
 		}
-		std::cout << "Compile values:" << opcode <<std::endl;
-		std::cout << "PC: " << pc << std::endl;
-		std::cout << "sp: " << sp << std::endl;
-		std::cout << "rstack:";
-		rstack->print();
-		std::cout << "fpsp: " << fpsp << std::endl;
-		std::cout << "fpstack:" << std::endl;
-		fpstack->print();
+//		std::cout << "Compile values:" << opcode <<std::endl;
+//		std::cout << "PC: " << pc << std::endl;
+//		std::cout << "sp: " << sp << std::endl;
+//		std::cout << "rstack:";
+//		rstack->print();
+//		std::cout << "fpsp: " << fpsp << std::endl;
+//		std::cout << "fpstack:" << std::endl;
+//		fpstack->print();
+
 	}
 
 	return 0;

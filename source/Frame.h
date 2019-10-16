@@ -10,7 +10,6 @@ public:
 	Frame();
 	virtual ~Frame();
 	void print();
-
 	std::vector<int> stack;
 };
 
