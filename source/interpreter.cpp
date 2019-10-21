@@ -42,22 +42,22 @@ short convert2short(Data& data1, Data& data2){
 //	}
 //	intosh = (0x0(reverse[0])<<16)|
 //	intosh = (data1.charV <<8) | data2.charV;
-	result = short(double(data1.charV) * std::pow(2,0) + double(data2.charV) * std::pow(2,0));
+	result = short(double(data1.charV) * std::pow(2,0) + double(data2.charV) * std::pow(2,8));
 	return result;
 }
 int convert2int(Data& data1, Data& data2,Data& data3, Data& data4){
 	int result;
 //	std::cout<<"data1:"<<data1.charV<<"  data2:"<<data2.charV<<"  data3:"<<data3.charV<<"  data4:"<<data4.charV<<std::endl;
 //	packit = (data1.charV << 24) | (data2.charV << 16) | (data3.charV << 8) | data4.charV;
-	result = int(double(data1.charV) * std::pow(2,0) + double(data2.charV) * std::pow(2,0) +
-			double(data3.charV) * std::pow(2,0) + double(data4.charV) * std::pow(2,0));
+	result = int(double(data1.charV) * std::pow(2,0) + double(data2.charV) * std::pow(2,8) +
+			double(data3.charV) * std::pow(2,16) + double(data4.charV) * std::pow(2,24));
 	return result;
 //	integer = data1.value*1000 + data2.value*100 + data3.value*10 + data4.
 }
 
 float convert2float(Data& data1, Data& data2, Data& data3, Data& data4){
 	float result;
-	result = double(data1.charV) * std::pow(2,0) + double(data2.charV) * std::pow(2,0) +
+	result = double(data1.charV) * std::pow(2,0.5) + double(data2.charV) * std::pow(2,0) +
 			double(data3.charV) * std::pow(2,0) + double(data4.charV) * std::pow(2,0);
 	return result;
 }

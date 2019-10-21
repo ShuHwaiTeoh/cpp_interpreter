@@ -20,11 +20,11 @@ int main(){
 	short s;
 	int i, j, flag = 1;
 	float f;
-	int valuei=0;
+	int valuei = 0;
 
 	//loadFile(argv[1], mem);
-//	loadFile("D:\\Purdue\\3\\30862\\hw\\C++project\\src\\interpreter_input.smp", mem);
-	loadFile("C:\\Users\\danie\\eclipse-workspace\\sample_test\\src\\interpreter_input.smp", mem);
+	loadFile("D:\\Purdue\\3\\30862\\hw\\interpreter\\src\\75_pushvf_test.smp", mem);
+//	loadFile("C:\\Users\\danie\\eclipse-workspace\\sample_test\\src\\interpreter_input.smp", mem);
 //	std::cout<<"f:   "<<int('f')<<std::endl;
 //	for (int h=0;h<90;h++){
 //		temp = mem->getMemory(h);
@@ -364,14 +364,14 @@ int main(){
 
 				break;
 		}
-//		std::cout << "Compile values:" << opcode <<std::endl;
-//		std::cout << "PC: " << pc << std::endl;
-//		std::cout << "sp: " << sp << std::endl;
-//		std::cout << "rstack:";
-//		rstack->print();
-//		std::cout << "fpsp: " << fpsp << std::endl;
-//		std::cout << "fpstack:" << std::endl;
-//		fpstack->print();
+		std::cout << "Compile values:" << opcode <<std::endl;
+		std::cout << "PC: " << pc << std::endl;
+		std::cout << "sp: " << sp << std::endl;
+		std::cout << "rstack:";
+		rstack->print();
+		std::cout << "fpsp: " << fpsp << std::endl;
+		std::cout << "fpstack:" << std::endl;
+		fpstack->print();
 
 	}
 
