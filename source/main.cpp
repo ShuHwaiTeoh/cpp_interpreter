@@ -23,7 +23,7 @@ int main(){
 	int valuei = 0;
 
 	//loadFile(argv[1], mem);
-	loadFile("D:\\Purdue\\3\\30862\\hw\\interpreter\\src\\75_pushvf_test.smp", mem);
+	loadFile("D:\\Purdue\\3\\30862\\hw\\interpreter\\src\\100_add_test.smp", mem);
 //	loadFile("C:\\Users\\danie\\eclipse-workspace\\sample_test\\src\\interpreter_input.smp", mem);
 //	std::cout<<"f:   "<<int('f')<<std::endl;
 //	for (int h=0;h<90;h++){
@@ -141,32 +141,75 @@ int main(){
 //				sp++;
 //				rstack->stack.insert(rstack->stack.begin()+sp,Data(rstack->stack[rstack->stack[sp].intV].charV, 'C'));
 //				sp++;
-				rstack->stack[sp].charV = rstack->stack[rstack->stack[sp].intV + fpstack->stack[fpsp] +1].charV;
+				if (rstack->stack[rstack->stack[sp].intV + fpstack->stack[fpsp] +1].type == 'C'){
+					rstack->stack[sp].charV = rstack->stack[rstack->stack[sp].intV + fpstack->stack[fpsp] +1].charV;
+					rstack->stack[sp].type = 'C';
+				}
+				else if (rstack->stack[rstack->stack[sp].intV + fpstack->stack[fpsp] +1].type == 'S'){
+					rstack->stack[sp].shortV = rstack->stack[rstack->stack[sp].intV + fpstack->stack[fpsp] +1].shortV;
+					rstack->stack[sp].type = 'S';				}
+				else if (rstack->stack[rstack->stack[sp].intV + fpstack->stack[fpsp] +1].type == 'I'){
+					rstack->stack[sp].intV = rstack->stack[rstack->stack[sp].intV + fpstack->stack[fpsp] +1].intV;
+					rstack->stack[sp].type = 'I';				}
+				else if (rstack->stack[rstack->stack[sp].intV + fpstack->stack[fpsp] +1].type == 'F'){
+					rstack->stack[sp].floatV = rstack->stack[rstack->stack[sp].intV + fpstack->stack[fpsp] +1].floatV;
+					rstack->stack[sp].type = 'F';
+				}
 				pc++;
 				break;
 			case 73:
 //				sp++;
 //				rstack->stack.insert(rstack->stack.begin()+sp,Data(rstack->stack[rstack->stack[sp].intV].shortV, 'S'));
 //				sp++;
-				rstack->stack[sp].shortV = rstack->stack[rstack->stack[sp].intV + fpstack->stack[fpsp] +1].shortV;
+				if (rstack->stack[rstack->stack[sp].intV + fpstack->stack[fpsp] +1].type == 'C'){
+					rstack->stack[sp].charV = rstack->stack[rstack->stack[sp].intV + fpstack->stack[fpsp] +1].charV;
+					rstack->stack[sp].type = 'C';
+				}
+				else if (rstack->stack[rstack->stack[sp].intV + fpstack->stack[fpsp] +1].type == 'S'){
+					rstack->stack[sp].shortV = rstack->stack[rstack->stack[sp].intV + fpstack->stack[fpsp] +1].shortV;
+					rstack->stack[sp].type = 'S';				}
+				else if (rstack->stack[rstack->stack[sp].intV + fpstack->stack[fpsp] +1].type == 'I'){
+					rstack->stack[sp].intV = rstack->stack[rstack->stack[sp].intV + fpstack->stack[fpsp] +1].intV;
+					rstack->stack[sp].type = 'I';				}
+				else if (rstack->stack[rstack->stack[sp].intV + fpstack->stack[fpsp] +1].type == 'F'){
+					rstack->stack[sp].floatV = rstack->stack[rstack->stack[sp].intV + fpstack->stack[fpsp] +1].floatV;
+					rstack->stack[sp].type = 'F';
+				}
 				pc++;
 				break;
 			case 74:
-//				i = rstack->stack[sp].intV;
-//				rstack->stack.pop_back();
-//				sp--;
-				rstack->stack[sp].intV = rstack->stack[rstack->stack[sp].intV + fpstack->stack[fpsp] +1].intV;
-//				sp++;
-//				std::cout<<"pc++??"<<pc<<std::endl;
+				if (rstack->stack[rstack->stack[sp].intV + fpstack->stack[fpsp] +1].type == 'C'){
+					rstack->stack[sp].charV = rstack->stack[rstack->stack[sp].intV + fpstack->stack[fpsp] +1].charV;
+					rstack->stack[sp].type = 'C';
+				}
+				else if (rstack->stack[rstack->stack[sp].intV + fpstack->stack[fpsp] +1].type == 'S'){
+					rstack->stack[sp].shortV = rstack->stack[rstack->stack[sp].intV + fpstack->stack[fpsp] +1].shortV;
+					rstack->stack[sp].type = 'S';				}
+				else if (rstack->stack[rstack->stack[sp].intV + fpstack->stack[fpsp] +1].type == 'I'){
+					rstack->stack[sp].intV = rstack->stack[rstack->stack[sp].intV + fpstack->stack[fpsp] +1].intV;
+					rstack->stack[sp].type = 'I';				}
+				else if (rstack->stack[rstack->stack[sp].intV + fpstack->stack[fpsp] +1].type == 'F'){
+					rstack->stack[sp].floatV = rstack->stack[rstack->stack[sp].intV + fpstack->stack[fpsp] +1].floatV;
+					rstack->stack[sp].type = 'F';
+				}
 				pc++;
-//				std::cout<<"pc++??"<<pc<<std::endl;
+//				std::cout<<"####################"<<rstack->stack[rstack->stack[sp].intV + fpstack->stack[fpsp] +1].floatV<<std::endl;
 				break;
 			case 75:
-//				rstack->stack.pop_back();
-//				rstack->stack.push_back(Data(rstack->stack[rstack->stack[sp].intV].floatV, 'F'));
-//				rstack->stack.pop_back();
-//				sp++;
-				rstack->stack[sp].floatV = rstack->stack[rstack->stack[sp].intV + fpstack->stack[fpsp] +1].floatV;
+				if (rstack->stack[rstack->stack[sp].intV + fpstack->stack[fpsp] +1].type == 'C'){
+					rstack->stack[sp].charV = rstack->stack[rstack->stack[sp].intV + fpstack->stack[fpsp] +1].charV;
+					rstack->stack[sp].type = 'C';
+				}
+				else if (rstack->stack[rstack->stack[sp].intV + fpstack->stack[fpsp] +1].type == 'S'){
+					rstack->stack[sp].shortV = rstack->stack[rstack->stack[sp].intV + fpstack->stack[fpsp] +1].shortV;
+					rstack->stack[sp].type = 'S';				}
+				else if (rstack->stack[rstack->stack[sp].intV + fpstack->stack[fpsp] +1].type == 'I'){
+					rstack->stack[sp].intV = rstack->stack[rstack->stack[sp].intV + fpstack->stack[fpsp] +1].intV;
+					rstack->stack[sp].type = 'I';				}
+				else if (rstack->stack[rstack->stack[sp].intV + fpstack->stack[fpsp] +1].type == 'F'){
+					rstack->stack[sp].floatV = rstack->stack[rstack->stack[sp].intV + fpstack->stack[fpsp] +1].floatV;
+					rstack->stack[sp].type = 'F';
+				}
 				pc++;
 				break;
 			case 76:

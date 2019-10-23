@@ -1,4 +1,5 @@
 #include "interpreter.h"
+#include <string.h>
 
 
 void loadFile(std::string fileName, MyMemory* mem){
@@ -56,9 +57,22 @@ int convert2int(Data& data1, Data& data2,Data& data3, Data& data4){
 }
 
 float convert2float(Data& data1, Data& data2, Data& data3, Data& data4){
-	float result;
-	result = double(data1.charV) * std::pow(2,0.5) + double(data2.charV) * std::pow(2,0) +
-			double(data3.charV) * std::pow(2,0) + double(data4.charV) * std::pow(2,0);
+	float result = 0.0;
+	unsigned char arr[4] = {data1.charV, data2.charV, data3.charV, data4.charV};
+	memcpy(&result, &arr, sizeof(result));
+//	const float result = static_cast<float>(arr[0] | arr[1] | arr[2] | arr[3]);
+	//	float f=(float)(arr);
+//	float d1, d2, d3, d4;
+//	float result;
+//	d4 = data1.charV << 24;
+//	d3 = (data2.charV << 24) >> 8;
+//	d2 = (data3.charV << 24) >> 16;
+//	d1 = (data4.charV << 24) >> 24;
+//	result = d4 + d3 + d2 + d1;
+//	result =(data4.charV << 24) | (data3.charV << 16) | (data2.charV << 8) | data1.charV);
+//	result = double(data1.charV) * std::pow(2,0.5) + double(data2.charV) * std::pow(2,0) +
+//			double(data3.charV) * std::pow(2,0) + double(data4.charV) * std::pow(2,0);
+
 	return result;
 }
 
