@@ -12,17 +12,18 @@ int main(int argc, char* argv[]) {
 	MyMemory* mem = new MyMemory();//Program memory
 	Runtime* rstack = new Runtime();//runtime stack
 	Frame* fpstack = new Frame();//stack of frame pointers
-	Data *temp = NULL;
+	Data* temp = NULL;
 	int pc = 0;//program counter
 	int sp = -1;//runtime stack pointer
 	int fpsp = -1;//frame pointer stack pointer
 	int opcode = 0;//instructions to be executed
+//	char c;
 	short s;
 	int i, j, flag = 1;
 	float f;
 	//int valuei = 0;
 
-	loadFile(argv[1], mem);
+	loadFile(argv[1], mem);//D:\Purdue\3\30862\hw\Final_Cproject\src\Basics.bin
 	//loadFile("D:\\Purdue\\3\\30862\\hw\\interpreter\\src\\100_add_test.smp", mem);
 //	loadFile("C:\\Users\\danie\\eclipse-workspace\\sample_test\\src\\interpreter_input.smp", mem);
 //	std::cout<<"f:   "<<int('f')<<std::endl;
@@ -213,7 +214,7 @@ int main(int argc, char* argv[]) {
 				pc++;
 				break;
 			case 76:
-				sp -= rstack->stack[sp].intV;
+				sp -= rstack->stack[sp].intV +1;
 //				for (int k=0;k<rstack->stack[sp].intV;k++){
 //					rstack->stack.pop_back();
 //				}
@@ -233,7 +234,7 @@ int main(int argc, char* argv[]) {
 					rstack->stack[fpstack->stack[fpsp]+rstack->stack[sp].intV+1].floatV = rstack->stack[sp-1].floatV;
 				}
 				rstack->stack[fpstack->stack[fpsp]+rstack->stack[sp].intV+1].type = rstack->stack[sp-1].type;
-//****				sp -= 2;
+				sp -= 2;
 //				rstack->stack.pop_back();
 				pc++;
 				break;
@@ -310,70 +311,122 @@ int main(int argc, char* argv[]) {
 				pc++;
 				break;
 			case 94:
-				temp = &(rstack->stack[sp-1]);
-				rstack->stack[sp-1] = rstack->stack[sp];
-				rstack->stack[sp] = *temp;
+				if (rstack->stack[sp-1].type == 'C'){
+					Data* temp1 = new Data('a','C');
+					temp1->charV = rstack->stack[sp-1].charV;
+					temp1->type = 'C';
+					rstack->stack[sp-1] = rstack->stack[sp];
+					rstack->stack[sp].charV = temp1->charV;
+					rstack->stack[sp].type = temp1->type;
+				}
+				else if (rstack->stack[sp-1].type == 'S'){
+					Data* temp1 = new Data(1,'S');
+					temp1->shortV = rstack->stack[sp-1].shortV;
+					temp1->type = 'S';
+					rstack->stack[sp-1] = rstack->stack[sp];
+					rstack->stack[sp].shortV = temp1->shortV;
+					rstack->stack[sp].type = temp1->type;
+				}
+				else if (rstack->stack[sp-1].type == 'I'){
+					Data* temp1 = new Data(1,'I');
+					temp1->intV = rstack->stack[sp-1].intV;
+					temp1->type = 'I';
+					rstack->stack[sp-1] = rstack->stack[sp];
+					rstack->stack[sp].intV = temp1->intV;
+					rstack->stack[sp].type = temp1->type;
+				}
+				else if (rstack->stack[sp-1].type == 'F'){
+					Data* temp1 = new Data(1,'F');
+					temp1->floatV = rstack->stack[sp-1].floatV;
+					temp1->type = 'F';
+					rstack->stack[sp-1] = rstack->stack[sp];
+					rstack->stack[sp].floatV = temp1->floatV;
+					rstack->stack[sp].type = temp1->type;
+				}
+//				temp = &(rstack->stack[sp-1]);
+
+
 				pc++;
 				break;
 			case 100:
-				if (rstack->stack[sp-1].type == 'S'){
-					rstack->stack[sp-1] = Data(rstack->stack[sp-1].shortV + rstack->stack[sp].shortV, 'S');
+//				std::cout<<"sp-1:"<<int(rstack->stack[sp-1].charV)<<"  "<<"sp:"<<int(rstack->stack[sp].charV)<<std::endl;
+//				std::cout<<"char:"<<int((char)(int(rstack->stack[sp-1].charV) + int(rstack->stack[sp].charV)))<<std::endl;
+				if (rstack->stack[sp-1].type == 'C'){
+					rstack->stack[sp-1].charV = (char)(int(rstack->stack[sp-1].charV)+ int(rstack->stack[sp].charV));
+				}
+				else if (rstack->stack[sp-1].type == 'S'){
+					rstack->stack[sp-1].shortV = rstack->stack[sp-1].shortV + rstack->stack[sp].shortV;
 				}
 				else if (rstack->stack[sp-1].type == 'I'){
-					rstack->stack[sp-1] = Data(rstack->stack[sp-1].intV + rstack->stack[sp].intV, 'I');
+					rstack->stack[sp-1].intV = rstack->stack[sp-1].intV + rstack->stack[sp].intV;
 				}
 				else if (rstack->stack[sp-1].type == 'F'){
-					rstack->stack[sp-1] = Data(rstack->stack[sp-1].floatV + rstack->stack[sp].floatV, 'F');
+					rstack->stack[sp-1].floatV = rstack->stack[sp-1].floatV + rstack->stack[sp].floatV;
 				}
+//				std::cout<<"after adding char:"<<int(rstack->stack[sp-1].charV)<<std::endl;
+
+
 //				rstack->stack.pop_back();
 				sp--;
 				pc++;
 				break;
 			case 104:
-				if (rstack->stack[sp-1].type == 'S'){
-					rstack->stack[sp-1] = Data(rstack->stack[sp-1].shortV - rstack->stack[sp].shortV, 'S');
+				if (rstack->stack[sp-1].type == 'C'){
+					rstack->stack[sp-1].charV = (char)(int(rstack->stack[sp-1].charV)- int(rstack->stack[sp].charV));
+				}
+				else if (rstack->stack[sp-1].type == 'S'){
+					rstack->stack[sp-1].shortV = rstack->stack[sp-1].shortV - rstack->stack[sp].shortV;
 				}
 				else if (rstack->stack[sp-1].type == 'I'){
-					rstack->stack[sp-1] = Data(rstack->stack[sp-1].intV - rstack->stack[sp].intV, 'I');
+					rstack->stack[sp-1].intV = rstack->stack[sp-1].intV - rstack->stack[sp].intV;
 				}
 				else if (rstack->stack[sp-1].type == 'F'){
-					rstack->stack[sp-1] = Data(rstack->stack[sp-1].floatV - rstack->stack[sp].floatV, 'F');
+					rstack->stack[sp-1].floatV = rstack->stack[sp-1].floatV - rstack->stack[sp].floatV;
 				}
+
 
 //				rstack->stack.pop_back();
 				sp--;
 				pc++;
 				break;
 			case 108:
-				if (rstack->stack[sp-1].type == 'S'){
-					rstack->stack[sp-1] = Data(rstack->stack[sp-1].shortV * rstack->stack[sp].shortV, 'S');
+				if (rstack->stack[sp-1].type == 'C'){
+					rstack->stack[sp-1].charV = (char)(int(rstack->stack[sp-1].charV)* int(rstack->stack[sp].charV));
+				}
+				else if (rstack->stack[sp-1].type == 'S'){
+					rstack->stack[sp-1].shortV = rstack->stack[sp-1].shortV * rstack->stack[sp].shortV;
 				}
 				else if (rstack->stack[sp-1].type == 'I'){
-					rstack->stack[sp-1] = Data(rstack->stack[sp-1].intV * rstack->stack[sp].intV, 'I');
+					rstack->stack[sp-1].intV = rstack->stack[sp-1].intV * rstack->stack[sp].intV;
 				}
 				else if (rstack->stack[sp-1].type == 'F'){
-					rstack->stack[sp-1] = Data(rstack->stack[sp-1].floatV * rstack->stack[sp].floatV, 'F');
+					rstack->stack[sp-1].floatV = rstack->stack[sp-1].floatV * rstack->stack[sp].floatV;
 				}
+
 //				rstack->stack.pop_back();
 				sp--;
 				pc++;
 				break;
 			case 112:
-				if (rstack->stack[sp-1].type == 'S'){
-					rstack->stack[sp-1] = Data(rstack->stack[sp-1].shortV / rstack->stack[sp].shortV, 'S');
+				if (rstack->stack[sp-1].type == 'C'){
+					rstack->stack[sp-1].charV = (char)(int(rstack->stack[sp-1].charV)/ int(rstack->stack[sp].charV));
+				}
+				else if (rstack->stack[sp-1].type == 'S'){
+					rstack->stack[sp-1].shortV = rstack->stack[sp-1].shortV / rstack->stack[sp].shortV;
 				}
 				else if (rstack->stack[sp-1].type == 'I'){
-					rstack->stack[sp-1] = Data(rstack->stack[sp-1].intV / rstack->stack[sp].intV, 'I');
+					rstack->stack[sp-1].intV = rstack->stack[sp-1].intV / rstack->stack[sp].intV;
 				}
 				else if (rstack->stack[sp-1].type == 'F'){
-					rstack->stack[sp-1] = Data(rstack->stack[sp-1].floatV / rstack->stack[sp].floatV, 'F');
+					rstack->stack[sp-1].floatV = rstack->stack[sp-1].floatV / rstack->stack[sp].floatV;
 				}
+
 //				rstack->stack.pop_back();
 				sp--;
 				pc++;
 				break;
 			case 144:
-				std::cout << rstack->stack[sp--].charV <<std::endl;
+				std::cout << int(rstack->stack[sp--].charV) <<std::endl;
 				pc++;
 				break;
 			case 145:
